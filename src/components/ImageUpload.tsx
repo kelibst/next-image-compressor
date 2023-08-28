@@ -11,9 +11,13 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ onImageUpload }) => {
     const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
     const onDrop = useCallback((acceptedFiles: File[]) => {
-        const file = acceptedFiles[0];
-        setSelectedFile(file);
-        onImageUpload(file);
+        console.log(acceptedFiles, 'acceptedFiels')
+        if (acceptedFiles.length) {
+            const file = acceptedFiles[0];
+            setSelectedFile(file);
+            onImageUpload(file);
+        }
+
     }, [onImageUpload]);
 
     return (
@@ -25,7 +29,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ onImageUpload }) => {
                     className="max-w-full max-h-48 mx-auto my-4"
                 />)
             }
-            <Dropzone onDrop={onDrop} accept="image/*" multiple={false}>
+            <Dropzone onDrop={onDrop} accept={{ 'image/jpeg': ['.jpeg', '.png', '.jpg'] }} multiple={false}>
                 {({ getRootProps, getInputProps }) => (
                     <div
                         className="dropzone border-2 border-dashed border-gray-300 p-6 cursor-pointer"
