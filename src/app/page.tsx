@@ -1,5 +1,6 @@
 'use client'
 import ImageUpload from '@/components/ImageUpload'
+import formatSize from '@/utils/formatSize';
 import imageCompression from 'browser-image-compression';
 import Image from 'next/image';
 import { useState } from 'react';
@@ -26,7 +27,7 @@ export default function Home() {
     <main className="block">
       <h1 className="text-center relative font-bold my-6">Image Compressor</h1>
       {compressedImage && <div className='flex relative justify-center'>
-        <div className="mr-4 text-center fixed bg-black p-2">Size: {compressedImage.size / 1000} Kb | <a className='bg-blue-800 px-3' href={URL.createObjectURL(compressedImage)}>Download</a></div>
+        <div className="mr-4 text-center fixed bg-black p-2">Size: {formatSize(compressedImage.size)} | <a className='bg-blue-800 px-3' href={URL.createObjectURL(compressedImage)}>Download</a></div>
 
         <Image
           src={URL.createObjectURL(compressedImage)}
